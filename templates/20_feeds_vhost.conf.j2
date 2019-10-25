@@ -1,0 +1,35 @@
+<VirtualHost *:80>
+   DocumentRoot {{ feeds_httpd_dir }}
+   ServerName {{ feeds_httpd_hostname }}
+   CustomLog logs/{{ feeds_httpd_hostname }}_access.log combined
+   ErrorLog logs/{{ feeds_httpd_hostname }}_error.log
+
+{% if feeds_httpd_tls %}
+   RewriteEngine On
+   RewriteCond $1 !^.well-known
+   RewriteCond %{HTTPS} !=on
+   RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+{% endif %} 
+
+#Directory Permissions
+  <Directory "{{ feeds_httpd_dir }}">
+   AllowOverride Indexes
+   Options Indexes FollowSymLinks
+   <IfVersion < 2.4>
+    Order allow,deny
+     Allow from all
+   </IfVersion>
+  <IfVersion >= 2.4>
+     IndexOptions FancyIndexing VersionSort NameWidth=* HTMLTable Charset=UTF-8
+    Require all granted
+   </IfVersion>
+ </Directory>
+
+
+  <Location "/.well-known/">
+     ProxyPass "http://cephas.centos.org/.well-known/"
+   </Location>
+
+
+</VirtualHost>
+

@@ -1,1 +1,62 @@
 # Defaults tasks for role httpd-feeds
+
+- name: Ensuring we have a document root for vhost
+  file:
+    path: "{{ feeds_httpd_dir }}"
+    state: directory
+
+- name: Generating .repo file that will be used to fetch content and generate .xml
+  template:
+    src: repo-rss.repo.j2
+    dest: /etc/yum.repos.d/repo-rss.repo
+
+- name: Generating leeching script
+  template:
+    src: rss-generator.j2
+    dest: /usr/libexec/centos/rss-generator
+    mode: 0755
+    
+- name: Ensuring we have repo-rss
+  yum:
+    name: yum-utils
+    state: installed
+
+- name: Cron job for rss-generator
+  cron:
+    name: rss-generator 
+    minute: "*/12"
+    job: /usr/libexec/centos/rss-generator
+
+- name: Configuring httpd
+  import_role:
+    name: httpd
+  vars:
+    httpd_tls: "{{ feeds_httpd_tls }}"
+
+- name: Configuring httpd vhost
+  template:
+    src: 20_feeds_vhost.conf.j2
+    dest: /etc/httpd/conf.d/20_feeds_vhost.conf
+  notify:
+    - restart_httpd
+
+- name: Configuring https
+  template:
+    src: "{{ item }}.j2"
+    dest: "/etc/httpd/conf.d/{{ item }}"
+  notify:
+    - restart_httpd
+  with_items:
+    - ssl-feeds-vhost.conf
+  when: feeds_httpd_tls  
+   
+- import_role:
+    name: httpd
+    tasks_from: pki-tls
+  vars:
+    pki_hostname: "{{ feeds_httpd_hostname }}"
+  notify:
+    - restart_httpd
+  tags:
+    - tls
+  when: feeds_httpd_tls

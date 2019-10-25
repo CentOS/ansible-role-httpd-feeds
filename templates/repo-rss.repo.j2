@@ -1,0 +1,15 @@
+{% for repo in repositories_to_track %}
+{% for arch in repo.arch %}
+{% for repository in repo.repositories %}
+[c{{repo.release }}-{{ arch }}-{{ repository }}]
+name=CentOS {{ repo.release }} {{ arch }} {{ repository }}
+{% if repo.release == 8 or repo.release == '8-stream' %}
+baseurl=http://mirror.centos.org/{{ repo.contentdir }}/{{ repo.release }}/{{ repository }}/{{ arch }}/os/
+{% else %}
+baseurl=http://mirror.centos.org/{{ repo.contentdir }}/{{ repo.release }}/{{ repository }}/{{ arch }}/
+{% endif %}
+enabled=0
+
+{% endfor %}
+{% endfor %}
+{% endfor %}

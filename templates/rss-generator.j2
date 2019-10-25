@@ -1,0 +1,14 @@
+#!/bin/bash
+
+target_dir="{{ feeds_httpd_dir }}"
+# Empty cache
+yum clean all --enablerepo=\* > /dev/null 2>&1
+
+{% for repo in repositories_to_track %}
+{% for arch in repo.arch %}
+{% for repository in repo.repositories %}
+repo-rss -f ${target_dir}/centos-{{ repo.release }}-{{ arch }}-{{ repository }}.xml -t "CentOS {{ repo.release }} {{ arch }} {{ repository }}" -d "Most recent updated packages for CentOS {{ repo.release }} {{ arch }} {{ repository }}" -r 20 c{{repo.release }}-{{ arch }}-{{ repository }}  >/dev/null 2>&1
+
+{% endfor %}
+{% endfor %}
+{% endfor %}

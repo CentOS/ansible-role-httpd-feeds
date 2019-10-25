@@ -1,1 +1,66 @@
 # Defaults variables for role httpd-feeds
+# This role will download repodata/repomd.xml and use repo-rss to generate rss/xml content that people can track
+
+feeds_httpd_dir: /var/www/feeds/
+feeds_httpd_hostname: feeds.centos.org
+feeds_httpd_tls: True
+
+# Which rpm repositories we want to fetch data and convert to rss xml feeds files 
+repositories_to_track:
+  - release: 6
+    contentdir: centos
+    arch: 
+      - x86_64
+      - i386
+    repositories:
+      - updates
+      - centosplus
+      - extras
+  - release: 7
+    contentdir: centos
+    arch: 
+      - x86_64
+    repositories:
+      - updates
+      - centosplus
+      - extras
+  - release: 7
+    contentdir: altarch
+    arch: 
+      - ppc64
+      - ppc64le
+      - aarch64
+      - armhfp
+      - i386
+    repositories:
+      - updates
+      - centosplus
+      - extras
+  - release: 8
+    contentdir: centos
+    arch: 
+      - ppc64le
+      - aarch64
+      - x86_64
+    repositories:
+      - BaseOS
+      - AppStream
+      - PowerTools
+      - centosplus
+  - release: 8-stream
+    contentdir: centos
+    arch: 
+      - ppc64le
+      - aarch64
+      - x86_64
+    repositories:
+      - BaseOS
+      - AppStream
+      - PowerTools
+      - centosplus
+
+
+
+
+
+      
