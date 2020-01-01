@@ -9,13 +9,17 @@
   template:
     src: repo-rss.repo.j2
     dest: /etc/yum.repos.d/repo-rss.repo
+  tags:
+    - feeds
 
 - name: Generating leeching script
   template:
     src: rss-generator.j2
     dest: /usr/libexec/centos/rss-generator
     mode: 0755
-    
+  tags:
+    - feeds
+
 - name: Ensuring we have repo-rss
   yum:
     name: yum-utils

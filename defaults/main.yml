@@ -24,6 +24,7 @@ repositories_to_track:
       - updates
       - centosplus
       - extras
+      - cr
   - release: 7
     contentdir: altarch
     arch: 
@@ -32,6 +33,7 @@ repositories_to_track:
       - aarch64
       - armhfp
       - i386
+      - cr
     repositories:
       - updates
       - centosplus
@@ -47,6 +49,7 @@ repositories_to_track:
       - AppStream
       - PowerTools
       - centosplus
+      - cr
   - release: 8-stream
     contentdir: centos
     arch: 
@@ -58,9 +61,6 @@ repositories_to_track:
       - AppStream
       - PowerTools
       - centosplus
-
-
-
 
 
       
