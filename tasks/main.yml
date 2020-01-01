@@ -36,6 +36,8 @@
     name: httpd
   vars:
     httpd_tls: "{{ feeds_httpd_tls }}"
+    httpd_html_autoindex_title: "CentOS Feeds"
+    httpd_html_autoindex_content: "{{ feeds_httpd_header }}"
 
 - name: Configuring httpd vhost
   template:

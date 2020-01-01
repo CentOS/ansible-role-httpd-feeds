@@ -62,5 +62,8 @@ repositories_to_track:
       - PowerTools
       - centosplus
 
-
-      
+# httpd settings
+feeds_httpd_header: |
+  <div class="alert alert-success" role="alert">
+  This directory tree contains CentOS Linux/Stream .xml file for latest updates pushed per repository<br>
+  </div>
