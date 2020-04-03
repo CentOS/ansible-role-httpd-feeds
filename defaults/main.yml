@@ -50,6 +50,7 @@ repositories_to_track:
       - PowerTools
       - centosplus
       - cr
+      - Devel
   - release: 8-stream
     contentdir: centos
     arch: 
