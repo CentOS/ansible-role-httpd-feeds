@@ -51,6 +51,7 @@ repositories_to_track:
       - centosplus
       - cr
       - Devel
+      - extras
   - release: 8-stream
     contentdir: centos
     arch: 
@@ -62,6 +63,7 @@ repositories_to_track:
       - AppStream
       - PowerTools
       - centosplus
+      - extras
 
 # httpd settings
 feeds_httpd_header: |
