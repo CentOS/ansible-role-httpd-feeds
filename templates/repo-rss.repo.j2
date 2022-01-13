@@ -5,6 +5,8 @@
 name=CentOS {{ repo.release }} {{ arch }} {{ repository }}
 {% if repo.release == 8 or repo.release == '8-stream' %}
 baseurl=http://mirror.centos.org/{{ repo.contentdir }}/{{ repo.release }}/{{ repository }}/{{ arch }}/os/
+{% elif repo.release == '9-stream' %}
+baseurl=http://mirror.stream.centos.org/{{ repo.release }}/{{ repository }}/{{ arch }}/os/
 {% else %}
 baseurl=http://mirror.centos.org/{{ repo.contentdir }}/{{ repo.release }}/{{ repository }}/{{ arch }}/
 {% endif %}
