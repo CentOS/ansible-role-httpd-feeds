@@ -64,6 +64,16 @@ repositories_to_track:
       - PowerTools
       - centosplus
       - extras
+  - release: 9-stream
+    arch:
+      - aarch64
+      - ppc64le
+      - s390x
+      - x86_64
+    repositories:
+      - AppStream
+      - BaseOS
+      - CRB
 
 # httpd settings
 feeds_httpd_header: |
