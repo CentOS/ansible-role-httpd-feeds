@@ -1,4 +1,14 @@
 # Defaults tasks for role httpd-feeds
+- name: Importing specific distro variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+
+- name: Ensuring some pkgs are installed
+  yum:
+    name: "{{ feeds_pkgs }}"
+    state: installed
 
 - name: Ensuring we have a document root for vhost
   file:
@@ -22,15 +32,16 @@
   tags:
     - feeds
 
-- name: Ensuring we have repo-rss
-  yum:
-    name: yum-utils
-    state: installed
+- name: Download rss.py tool 
+  get_url:
+    url: https://git.resf.org/sig_core/toolkit/raw/branch/devel/mangle/generators/rss.py
+    dest: /usr/libexec/centos/repo-rss.py
+    mode: '0755'
 
 - name: Cron job for rss-generator
   cron:
     name: rss-generator 
-    minute: "*/12"
+    minute: "*/20"
     job: /usr/libexec/centos/rss-generator
 
 - name: Configuring httpd
