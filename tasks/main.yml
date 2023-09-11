@@ -4,6 +4,8 @@
   file:
     path: "{{ feeds_httpd_dir }}"
     state: directory
+  tags:
+    - feeds
 
 - name: Generating .repo file that will be used to fetch content and generate .xml
   template:
