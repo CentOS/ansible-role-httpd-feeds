@@ -3,6 +3,9 @@
    ServerName {{ feeds_httpd_hostname }}
    CustomLog logs/{{ feeds_httpd_hostname }}_access.log combined
    ErrorLog logs/{{ feeds_httpd_hostname }}_error.log
+   ReadmeName /centos-design/footer.html
+   HeaderName /centos-design/header-centos-repositories-feeds.html
+
 
 {% if feeds_httpd_tls %}
    RewriteEngine On

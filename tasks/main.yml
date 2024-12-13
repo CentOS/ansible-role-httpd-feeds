@@ -49,8 +49,14 @@
     name: httpd
   vars:
     httpd_tls: "{{ feeds_httpd_tls }}"
-    httpd_html_autoindex_title: "CentOS Feeds"
-    httpd_html_autoindex_content: "{{ feeds_httpd_header }}"
+
+- import_role:
+    name: httpd
+    tasks_from: custom-header
+  vars:
+    - httpd_custom_header_page: "{{ feeds_header_page }}"
+  tags:
+    - theme
 
 - name: Configuring httpd vhost
   template:
@@ -59,6 +65,8 @@
     mode: 0644
   notify:
     - restart_httpd
+  tags:
+    - theme
 
 - name: Configuring https
   template:

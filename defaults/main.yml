@@ -33,3 +33,15 @@ feeds_httpd_header: |
   <div class="alert alert-success" role="alert">
   This directory tree contains CentOS Linux/Stream .xml file for latest updates pushed per repository<br>
   </div>
+
+feeds_header_page:
+  title: 'CentOS Repositories Feeds'
+  title_lead: ''
+  with_manifestation: ''
+  with_content:
+    - element: p
+      element_class: alert alert-success
+      element_content: >-
+        This directory tree contains CentOS Stream rss feeds, one file per stream_release-architecture-repoid<br>
+        You can point your rss reader to the repositories you'd like to get info from, like the last pushed packages and info about these.
+  
