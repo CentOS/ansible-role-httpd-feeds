@@ -32,11 +32,13 @@
   tags:
     - feeds
 
-- name: Download rss.py tool 
-  get_url:
-    url: https://git.resf.org/sig_core/toolkit/raw/branch/devel/mangle/generators/rss.py
+- name: Distribute rss.py tool (from https://git.resf.org/sig_core/toolkit/raw/branch/devel/mangle/generators/rss.py)
+  copy:
+    src: rss.py
     dest: /usr/libexec/centos/repo-rss.py
     mode: '0755'
+  tags:
+    - rss_tool
 
 - name: Cron job for rss-generator
   cron:
